@@ -29,7 +29,7 @@ class InternetConnectionInterface:
     if cmd == 'location':
       self.__send_position(data)
     elif cmd == 'heartbeat':
-      self.send_heartbeat()
+      self.__send_heartbeat()
     else:
       print 'Command not found'
 
