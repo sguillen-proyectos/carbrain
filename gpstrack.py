@@ -2,7 +2,7 @@
 
 import time
 import json
-import utils as _
+import utils as _ #utils file
 from serial import Serial
 from carlog import logger
 from threading import Thread
