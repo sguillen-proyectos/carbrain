@@ -1,5 +1,5 @@
 import urllib2
-#verificar inter
+
 def check_internet():
   try:
     url = urllib2.urlopen('http://motherfuckingwebsite.com/')
