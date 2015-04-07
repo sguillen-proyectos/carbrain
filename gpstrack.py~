@@ -3,38 +3,19 @@
 import time
 import json
 import utils as _ #utils file
-import RPi.GPIO as gpio
-
 from serial import Serial
 from carlog import logger
 from threading import Thread
 from beehive import InternetConnectionInterface
 from cerebro import ManejaAuto
 
-
 GPS_ENABLED = False
 
 car = ManejaAuto()
 
-try:
-  gpio.setmode(gpio.BCM)
-except:
-  logger.info('error gpio setmode')
-
 def on_connect(client, userdata, rc):
   logger.info('connected to beehive')
   client.subscribe('car/command')
-
-#signaling for sending and receiving
-def __init__(self): 
-  try:
-    gpio.setmode(gpio.BCM)
-    gpio.setup(19, gpio.OUT) #sending
-    gpio.setup(26, gpio.OUT) #receiving information
-    gpio.output(19, False)
-    gpio.output(26, False)
-  except:
-    logger.info('error gpio')
 
 def on_message(client, userdata, msg):
   global GPS_ENABLED
@@ -53,18 +34,6 @@ def on_message(client, userdata, msg):
       logger.info('Executing Braking')
       car.activar_motor(command)
     client.publish('car/confirmation', data['time'])
-  try:
-    gpio.output(26, True)
-    time.sleep(0.3)
-    gpio.output(26, False)
-    time.sleep(0.3)
-    gpio.output(26, True)
-    time.sleep(0.3)
-    gpio.output(26, False)
-    time.sleep(0.3)
-  except:
-    logger.info('error gpio signals gpio26')
-
 
 s = Serial('/dev/ttyUSB3', 115200, timeout=1)
 
@@ -116,17 +85,6 @@ class GPSReader(Thread):
               logger.info('POSITION ' + data_json)
 
               connection_interface.send('location', data_json)
-              try:
-                gpio.output(17, True)
-                time.sleep(0.3)
-                gpio.output(17, False)
-                time.sleep(0.3)
-                gpio.output(17, True)
-                time.sleep(0.3)
-                gpio.output(17, False)
-                time.sleep(0.3)
-              except:
-                logger.info('error gpio signals gpio17')
             else:
               logger.info('GPS not enabled')
 
