@@ -35,7 +35,7 @@ class InternetConnectionInterface:
 
   def __send_position(self, data):
     data = str(data)
-    self.client.publish('car/location', data)
+    self.client.publish('D286D9B8-9B66-AB85-5484-EE7DB3BE6F3A/position', data)
 
   def __send_heartbeat(self):
-    self.client.publish('car/heartbeat', '1')
+    self.client.publish('D286D9B8-9B66-AB85-5484-EE7DB3BE6F3A/heartbeat', '1')

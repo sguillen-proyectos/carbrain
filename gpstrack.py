@@ -15,7 +15,7 @@ car = ManejaAuto()
 
 def on_connect(client, userdata, rc):
   logger.info('connected to beehive')
-  client.subscribe('car/command')
+  client.subscribe('865ECF88-1BDA-04CA-259B-AE58373F308B/command')
 
 def on_message(client, userdata, msg):
   global GPS_ENABLED
