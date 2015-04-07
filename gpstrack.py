@@ -41,7 +41,7 @@ def on_message(client, userdata, msg):
   logger.info(msg.topic + " " + msg.payload)
   topic = msg.topic
   data = json.loads(msg.payload)
-  if topic == 'car/command':
+  if topic == '865ECF88-1BDA-04CA-259B-AE58373F308B/command':
     command = data['cmd']
     if command == 'G':
       logger.info('Enabling GPS')
@@ -52,7 +52,7 @@ def on_message(client, userdata, msg):
     elif command == '1' or command == '2':
       logger.info('Executing Braking')
       car.activar_motor(command)
-    client.publish('car/confirmation', data['time'])
+    client.publish('D286D9B8-9B66-AB85-5484-EE7DB3BE6F3A/confirmation', data['time'])
   try:
     gpio.output(26, True)
     time.sleep(0.3)
