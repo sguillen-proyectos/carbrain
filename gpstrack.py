@@ -89,6 +89,8 @@ logger.info('Starting...')
 class GPSReader(Thread):
   def run(self):
     logger.info('Starting GPS reading...	')
+    # to delete when gps works
+    counter = 0
     while True:
       try:
         msg = self.modem.read(1024)
@@ -112,7 +114,12 @@ class GPSReader(Thread):
 
             if GPS_ENABLED:
               logger.info('Sending to mqtt')
-              position = _.get_position(res)
+              # position = _.get_position(res)
+  
+              position = _.get_position2(counter)
+              counter = counter + 1
+ 
+
               data_json = json.dumps(position)
               logger.info('POSITION ' + data_json)
 

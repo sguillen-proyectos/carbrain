@@ -9,6 +9,10 @@ def check_internet():
 
   return False
 
+def get_position2(counter):
+  locations = [{ "lat":-16.462000, "lng":-68.108986 },{ "lat":-16.461825, "lng":-68.108739 },{ "lat":-16.461784, "lng":-68.108438 },{ "lat":-16.461867, "lng":-68.108213 },{ "lat":-16.461877, "lng":-68.107977 },{ "lat":-16.461723, "lng":-68.107784 },{ "lat":-16.461609, "lng":-68.107602 }]
+  return locations[counter]
+
 def get_position(gps):
   latitude = float(gps[0][0:2] + '.' + gps[0][2:4] + gps[0][5:])
   longitude = float(gps[2][0:3] + '.' + gps[2][3:5] + gps[2][6:])
