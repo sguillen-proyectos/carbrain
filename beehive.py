@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import paho.mqtt.client as mqtt
+from config import config
 from carlog import logger
 # from cerebro import ManejaAuto
 
@@ -35,7 +36,7 @@ class InternetConnectionInterface:
 
   def __send_position(self, data):
     data = str(data)
-    self.client.publish('D286D9B8-9B66-AB85-5484-EE7DB3BE6F3A/position', data)
+    self.client.publish(config['location_topic'], data)
 
   def __send_heartbeat(self):
-    self.client.publish('D286D9B8-9B66-AB85-5484-EE7DB3BE6F3A/heartbeat', '1')
+    self.client.publish(config['heartbeat_topic'], '1')

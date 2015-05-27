@@ -5,6 +5,7 @@ import json
 import utils as _ #utils file
 import RPi.GPIO as gpio
 
+from config import config
 from serial import Serial
 from carlog import logger
 from threading import Thread
@@ -23,7 +24,7 @@ except:
 
 def on_connect(client, userdata, rc):
   logger.info('connected to beehive')
-  client.subscribe('865ECF88-1BDA-04CA-259B-AE58373F308B/command')
+  client.subscribe(config['command_topic'])
 
 #signaling for sending and receiving
 def __init__(self): 
@@ -41,7 +42,7 @@ def on_message(client, userdata, msg):
   logger.info(msg.topic + " " + msg.payload)
   topic = msg.topic
   data = json.loads(msg.payload)
-  if topic == '865ECF88-1BDA-04CA-259B-AE58373F308B/command':
+  if topic == config['command_topic']:
     command = data['cmd']
     if command == 'G':
       logger.info('Enabling GPS')
@@ -52,7 +53,7 @@ def on_message(client, userdata, msg):
     elif command == '1' or command == '2':
       logger.info('Executing Braking')
       car.activar_motor(command)
-    client.publish('D286D9B8-9B66-AB85-5484-EE7DB3BE6F3A/confirmation', data['time'])
+    client.publish(config['confirmation_topic'], data['time'])
   try:
     gpio.output(26, True)
     time.sleep(0.3)
